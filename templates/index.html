@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Speed Test Encryption</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap" rel="stylesheet">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="../static/assets/css/normalize-reset.css" type="text/css" />
+        <link rel="stylesheet" href="../static/assets/css/style.css" type="text/css" />
+
+        <!-- Icon -->
+        <link rel="icon" href="../icon.png" type="image/x-icon" />
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f9;
+                color: #333;
+            }
+            .container {
+                max-width: 800px;
+                margin: -30px auto;
+                background: #fff;
+                border-radius: 8px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+            }
+            h1 {
+                text-align: center;
+                color: #444;
+            }
+            h2 {
+                text-align: center;
+                color: #444444;
+                margin-top: 15px;
+                margin-bottom: 13px;
+
+            }
+            .user-level {
+                display: none; /* Hide all levels by default */
+            }
+            .user-level.active {
+                display: block; /* Show only the active level */
+            }
+            ul.combinations {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            .combinations li {
+                background: #e7f3fe;
+                margin: 10px 0;
+                padding: 15px 20px;
+                border-radius: 6px;
+                box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+                font-size: 1.1em;
+                color: #555;
+            }
+            .form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        max-width: 500px;
+        margin: auto;
+    }
+
+    .form label {
+        display: flex;
+        flex-direction: column;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+
+    .form select,
+    .form input {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+
+    .form input[type="submit"] {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .form input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    .form h2 {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .form-area {
+        padding: 2rem;
+        background: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: auto;
+        margin-top: 30px;
+    }
+        </style>
+    </head>
+    <body class="page">
+        <aside class="info-area">
+        <div class="container">
+            <h1>Speed Test Encryption</h1>
+            <span class="important info">Packet sizes vary between 1 MB and 100MB.</span>
+
+            <!-- Dropdown for Level Selection -->
+            <div class="dropdown" >
+                <label for="levelSelect">Select a Level:</label>
+                <select id="levelSelect" style="width: 258px;margin-left: 3px;">
+                    <option value="level1">Level 1</option>
+                    <option value="level2">Level 2</option>
+                    <option value="level3">Level 3</option>
+                    <option value="level4">Level 4</option>
+                </select>
+            </div>
+
+            <!-- Level 1 -->
+            <div id="level1" class="user-level active">
+                <h2>Guest</h2>
+                <ul class="combinations">
+                    <li>1. AES-256-gcm + RSA</li>
+                    <li>2. ChaCha20 + ECC (Curve25519)</li>
+                </ul>
+                <h2>Basic</h2>
+                <ul class="combinations">
+                    <li>3. AES-128-ccm + ChaCha20 + ECC (Curve25519)</li>
+                    <li>4. AES-256-gcm + ChaCha20 + RSA</li>
+                </ul>
+                <h2>Advanced</h2>
+                <ul class="combinations">
+                    <li>5. ChaCha20 + AES-256-gcm</li>
+                    <li>6. AES-128-ccm + RSA</li>
+                    <li>7. AES-128-ccm + AES-256-gcm + ECC (Curve25519)</li>
+                </ul>
+                <h2>Admin</h2>
+                <ul class="combinations">
+                    <li>8. AES-256-gcm + ChaCha20 + ECC (Curve25519)</li>
+                    <li>9. AES-128-ccm + ChaCha20 + RSA</li>
+                    <li>10. ChaCha20 + ECC (Curve25519) + RSA</li>
+                </ul>
+            </div>
+
+            <!-- Level 2 -->
+            <div id="level2" class="user-level">
+                <h2>Guest</h2>
+                <ul class="combinations">
+                    <li>1. AES-128-CCM + ChaCha20</li>
+                    <li>2. AES-128-CCM + AES-192-CCM</li>
+                </ul>
+                <h2>Basic</h2>
+                <ul class="combinations">
+                    <li>3. AES-256-CCM + ChaCha20-Poly1305</li>
+                    <li>4. AES-128-CCM + AES-192-CCM + XChaCha20</li>
+                </ul>
+                
+                <h2>Advanced</h2>
+                <ul class="combinations">
+                    <li>5. AES-128-CCM + AES-256-CCM + ChaCha20</li>
+                    <li>6. AES-256-CCM + XChaCha20 + ChaCha20</li>
+                    <li>7. AES-192-CCM + XChaCha20</li>
+                </ul>
+                
+                <h2>Admin</h2>
+                <ul class="combinations">
+                    <li>8. AES-256-CCM + AES-128-CCM + ChaCha20</li>
+                    <li>9. AES-192-CCM + AES-256-CCM + XChaCha20</li>
+                    <li>10. AES-128-CCM + ChaCha20-Poly1305 + XChaCha20</li>
+                </ul>
+            </div>
+
+            <!-- Level 3 -->
+            <div id="level3" class="user-level">
+                <h2>Guest</h2>
+                <ul class="combinations">
+                    <li>1. AES-128-CTR</li>
+                </ul>
+            
+                <h2>Basic</h2>
+                <ul class="combinations">
+                    <li>2. AES-128-CTR + ChaCha20</li>
+                    <li>3. AES-192-CTR + Blowfish</li>
+                </ul>
+            
+                <h2>Advanced</h2>
+                <ul class="combinations">
+                    <li>4. AES-256-CTR + ChaCha20</li>
+                    <li>5. AES-128-CTR + Blowfish + ChaCha20</li>
+                    <li>6. AES-192-CTR + ChaCha20 + ECC (Curve25519)</li>
+                </ul>
+            
+                <h2>Admin</h2>
+                <ul class="combinations">
+                    <li>7. AES-256-CTR + ChaCha20 + ECC (Curve25519)</li>
+                    <li>8. AES-128-CTR + Blowfish</li>
+                    <li>9. AES-256-CTR + Blowfish</li>
+                    <li>10. AES-128-CTR + Blowfish + ChaCha20 + ECC (Curve25519)</li>
+                </ul>
+            </div>
+
+            <!-- Level 4 -->
+            <div id="level4" class="user-level">
+                <h2>Guest</h2>
+                <ul class="combinations">
+                    <li>1. Blowfish + AES-128-CTR</li>
+                </ul>
+            
+                <h2>Basic</h2>
+                <ul class="combinations">
+                    <li>2. AES-192-CTR + ChaCha20</li>
+                    <li>3. AES-128-CTR + HMAC-SHA512</li>
+                </ul>
+            
+                <h2>Advanced</h2>
+                <ul class="combinations">
+                    <li>4. AES-192-CTR + AES-256-CTR + ChaCha20 + HMAC-SHA512</li>
+                    <li>5. AES-256-CTR + Blowfish</li>
+                    <li>6. AES-128-CTR + AES-256-CTR + ChaCha20</li>
+                </ul>
+            
+                <h2>Admin</h2>
+                <ul class="combinations">
+                    <li>7. AES-192-CTR + AES-256-CTR + ChaCha20 + HMAC-SHA512 + ECC (Curve25519)</li>
+                    <li>8. AES-256-CTR + ChaCha20 + ECC (Curve25519)</li>
+                    <li>9. AES-128-CTR + Blowfish + ChaCha20 + HMAC-SHA512</li>
+                    <li>10. AES-256-CTR + Blowfish + ECC (Curve25519)</li>
+                </ul>
+            </div>
+        </div>
+    </aside>
+    <main class="form-area">
+        <!-- Form -->
+        <form class="form" action="/encrypt" method="post">
+            <h2>New Speed Test</h2>
+            <!-- Level Selection -->
+            <label for="level">
+                Select a Level:
+                <select name="level" id="level">
+                    <option value="1">Level 1</option>
+                    <option value="2">Level 2</option>
+                    <option value="3">Level 3</option>
+                    <option value="4">Level 4</option>
+                </select>
+            </label>
+        
+            <!-- Method Selection -->
+            <label for="method">
+                Select a Method:
+                <select name="method" id="method">
+                    <option value="Guest">Guest</option>
+                    <option value="Basic">Basic</option>
+                    <option value="Advanced">Advanced</option>
+                    <option value="Admin">Admin</option>
+                </select>
+            </label>
+        
+            <!-- Algorithm Selection -->
+            <label for="algorithm">
+                Select an Algorithm:
+                <select name="algorithm" id="algorithm">
+                    <!-- Options will be populated dynamically -->
+                </select>
+            </label>
+        
+            <!-- Packet Size -->
+            <label for="size">
+                Packet size (MB):
+                <input id="size" type="number" name="size" min="1" max="1024" value="1" />
+            </label>
+        
+            <input type="submit" value="Encrypt" name="submit" />
+        </form>
+        
+        <script>
+            // Define algorithms for each level and method
+            const algorithms = {
+                1: {
+                    Guest: ["AES-256-gcm + RSA", "ChaCha20 + ECC (Curve25519)"],
+                    Basic: ["AES-128-ccm + ChaCha20 + ECC (Curve25519)", "AES-256-gcm + ChaCha20 + RSA"],
+                    Advanced: ["ChaCha20 + AES-256-gcm", "AES-128-ccm + RSA", "AES-128-ccm + AES-256-gcm + ECC (Curve25519)"],
+                    Admin: ["AES-256-gcm + ChaCha20 + ECC (Curve25519)", "AES-128-ccm + ChaCha20 + RSA", "ChaCha20 + ECC (Curve25519) + RSA"]
+                },
+                2: {
+                    Guest: ["AES-128-CCM + ChaCha20", "AES-128-CCM + AES-192-CCM"],
+                    Basic: ["AES-256-CCM + ChaCha20-Poly1305","AES-128-CCM + AES-192-CCM + XChaCha20"],
+                    Advanced: ["AES-128-CCM + AES-256-CCM + ChaCha20","AES-256-CCM + XChaCha20 + ChaCha20","AES-192-CCM + XChaCha20"],
+                    Admin: ["AES-256-CCM + AES-128-CCM + ChaCha20","AES-192-CCM + AES-256-CCM + XChaCha20","AES-128-CCM + ChaCha20-Poly1305 + XChaCha20"]
+                },
+                3: {
+                    Guest: ["AES-128-CTR"],
+                    Basic: ["AES-128-CTR + ChaCha20","AES-192-CTR + Blowfish"],
+                    Advanced: ["AES-256-CTR + ChaCha20","AES-128-CTR + Blowfish + ChaCha20","AES-192-CTR + ChaCha20 + ECC (Curve25519)"],
+                    Admin: ["AES-256-CTR + ChaCha20 + ECC (Curve25519)","AES-128-CTR + Blowfish","AES-256-CTR + Blowfish","AES-128-CTR + Blowfish + ChaCha20 + ECC (Curve25519)"]
+                },
+                4: {
+                    Guest: ["Blowfish + AES-128-CTR"],
+                    Basic: ["AES-192-CTR + ChaCha20","AES-128-CTR + HMAC-SHA512"],
+                    Advanced: ["AES-192-CTR + AES-256-CTR + ChaCha20 + HMAC-SHA512","AES-256-CTR + Blowfish","AES-128-CTR + AES-256-CTR + ChaCha20"],
+                    Admin: ["AES-192-CTR + AES-256-CTR + ChaCha20 + HMAC-SHA512 + ECC (Curve25519)","AES-256-CTR + ChaCha20 + ECC (Curve25519)","AES-128-CTR + Blowfish + ChaCha20 + HMAC-SHA512","AES-256-CTR + Blowfish + ECC (Curve25519)"]
+                }
+            };
+        
+            // Get DOM elements
+    const levelSelect2 = document.getElementById('level');
+    const methodSelect = document.getElementById('method');
+    const algorithmSelect = document.getElementById('algorithm');
+
+    // Function to update method and algorithm options
+    function updateMethodsAndAlgorithms() {
+        // Reset method dropdown to default (first option)
+        methodSelect.selectedIndex = 0;
+
+        // Update algorithms for the default method
+        updateAlgorithms();
+    }
+
+    // Function to update algorithm options
+    function updateAlgorithms() {
+        // Get selected level and method
+        const level = levelSelect2.value;
+        const method = methodSelect.value;
+
+        // Clear existing options in algorithm dropdown
+        algorithmSelect.innerHTML = '';
+
+        // Populate algorithm dropdown based on selected level and method
+        if (algorithms[level] && algorithms[level][method]) {
+            algorithms[level][method].forEach(algorithm => {
+                const option = document.createElement('option');
+                option.value = algorithm;
+                option.textContent = algorithm;
+                algorithmSelect.appendChild(option);
+            });
+        }
+    }
+
+    // Event listeners
+    levelSelect.addEventListener('change', updateMethodsAndAlgorithms); // Refresh methods and algorithms on level change
+    methodSelect.addEventListener('change', updateAlgorithms); // Refresh algorithms on method change
+
+    // Initialize the dropdowns
+    updateMethodsAndAlgorithms();
+        </script>
+        {% if result %}
+        <h2>Results:</h2>
+        <p><strong>Level:</strong> {{ result.level }}</p>
+        <p><strong>Method:</strong> {{ result.method }}</p>
+        <p><strong>Algorithm:</strong> {{ result.algorithm }}</p>
+        <p><strong>Size:</strong> {{ result.size / (1024 * 1024) }} MB</p>
+        <p><strong>Encryption Time:</strong> {{ result.encryption_time }} seconds</p>
+        <p><strong>Decryption Time:</strong> {{ result.decryption_time }} seconds</p>
+        {% elif error %}
+        <h2>Error:</h2>
+        <p>{{ error }}</p>
+        {% endif %}
+    </main>
+        <script>
+            // Get dropdown and levels
+            const levelSelect = document.getElementById('levelSelect');
+            const levels = document.querySelectorAll('.user-level');
+
+            // Handle level selection change
+            levelSelect.addEventListener('change', () => {
+                // Hide all levels
+                levels.forEach(level => level.classList.remove('active'));
+
+                // Show selected level
+                const selectedLevel = document.getElementById(levelSelect.value);
+                if (selectedLevel) {
+                    selectedLevel.classList.add('active');
+                }
+            });
+        </script>
+    </body>
+</html>
