@@ -109,13 +109,6 @@ If you encounter any issues, follow these steps:
 3. Check the error logs in the terminal for detailed error messages.
 4. Restart the Flask server after making any code changes.
 
----
-
-## Security Notice
-
-This project is designed for educational purposes only. While it demonstrates cryptographic techniques, it is not intended for production use. Always follow best practices for cryptography in real-world applications.
-
----
 
 ## Contributions
 
