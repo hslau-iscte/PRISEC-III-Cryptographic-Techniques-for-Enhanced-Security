@@ -88,9 +88,8 @@ You will now see the application running locally on your machine. You can use th
 - `app.py`: Main Flask application file containing the encryption logic.
 - `templates/`: HTML templates for the web interface.
 - `static/`: Static files (CSS, JavaScript) for the frontend.
-- `requirements.txt`: File listing all Python dependencies for the project.
-- `testing/`: Folder containing test scripts and results.
-- `results/`: Folder containing the encryption and decryption time results and logs.
+- `Tabelas com os resultados dos testes -12-01-2025/`: Folder containing test scripts and results.
+- `Prisec III - Text document.docs`: File containing the encryption and decryption time results and logs.
 
 ## Encryption Algorithms Used
 
